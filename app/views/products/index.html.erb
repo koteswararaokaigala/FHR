@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+<div class="container">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary"> 
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="bg-dark">
+   <button class="btn btn-info btn-round mt-4 btn1" id ="diagnostic">Diagnostic Report</button>
+   <button class="btn btn-info btn-round mt-4 btn1" id="prescription">Prescription</button>
+  </div>
+  <div class="diagnostic">
+    <div class="container" style="padding-top: 10px">
+      <h5 class="title no-padding heading">Diagnostic Report</h5>
+        <div class="row ">
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">
+              <label class="text-capitalize textlabel" id= "report_type">Report Type<span class="text-danger mandatory"> *</span></label>         
+              <br>          
+              <div class="form-check form-check-radio form-check-inline ">
+                <label class="form-check-label">
+                <input id="reportType1" name="reportType" checked="checked" class="form-check-input reportType" type="radio" value="394595002"> Lab
+                <span class="form-check-sign"></span>
+                </label>
+              </div>
+              <div class="form-check form-check-radio form-check-inline ">
+                <label class="form-check-label">
+                <input id="reportType2" name="reportType" class="form-check-input reportType" type="radio" value="360037004"> Imaging
+                <span class="form-check-sign"></span>
+                </label>
+              </div>        
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="form-group">      
+              <label for="reportCategory" class="text-primary">Report Category<span class="text-danger mandatory"> *</span></label>
+              <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input id="reportCategory" name="reportCategory" type="text" class="form-control ui-autocomplete-input" onchange="fn_checkAutocomplete('reportCategory')" value="" autocomplete="off">
+              <input id="reportCategoryId" name="reportCategoryId" type="hidden" class="form-control" value="">       
+            </div>  
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group">
+            <label for="testCode" class=" saveme text-primary textlabel" id="changeme">Laboratory Test Name</label><span class="text-danger mandatory"> *</span>         
+            <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span><input id="testCode" name="testCode" type="text" class="form-control ui-autocomplete-input" onchange="fn_checkAutocomplete('testCode')" value="" autocomplete="off">
+            <input id="testCodeId" name="testCodeId" type="hidden" class="form-control" value="">
+          </div>
+        </div>              
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="datepicker-container">    
+            <div class="form-group">
+              <label for="reportDate" class="text-primary">Report Created Date<span class="text-danger mandatory"> *</span></label>          
+              <div class="input-group">
+                <input id="reportDate" name="reportDate" data-target="#reportDate" type="text" class="form-control  border-right-0" value="">
+                <div class="input-group-append" data-target="#reportDate" data-toggle="datetimepicker">
+                  <div class="input-group-text border-left-0"><i class="fa fa-calendar"></i></div>
+                </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group">
+            <label for="conclusion" class="text-primary">Report Conclusion<span class="text-danger mandatory"> *</span></label>
+            <textarea id="conclusion" name="conclusion" class="form-control" onchange="fn_validateAlphaNum('conclusion');" rows="3"></textarea>
+          </div>  
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-6">
+          <div class="form-group">
+            <label for="reportingDoctor" class="text-primary">Reporting Doctor<span class="text-danger mandatory"> *</span></label>
+            <div class="row">
+              <div class="col-sm-10 col-md-10 col-lg-10 pr-1">
+                <input id="reportingDoctor" name="reportingDoctor" type="text" class="form-control" onchange="fn_validateAlphaNum('reportingDoctor');" value="">    
+              </div>
+              <div class="col-sm-2 col-md-2 col-lg-2 verifyDrClass pl-0">     
+                <button class="btn btn-warning btn-round mt-4 btn1" onclick="verifyDoctor()">Verify</button>   
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+      <label for="conclusion" class="text-primary">Upload File
+      <span class="text-danger mandatory"> *</span></label>
+      <div class="custom-file">
+      <input id="diagReport" name="diagReport" type="file" class="custom-file-input" onchange="dynamicFile()" value="">
+      </div>
+      <br>   
+    </div>
+  </div>
+
+  <div class="prescription">
+    <h2 class="text-info">Prescription</h1>
+      <tr>
+        <td>
+          <label class="text-primary">
+            Condintion/Diagnosis
+          </label>
+            <textarea class="form-control" rows="2" style="width: 379px; height: 84px;"></textarea>
+        </td>
+      </tr>
+      <br>
+    <table class="table">
+      <thead class="bg-primary">
+        <tr>
+          <th>Drug Name</th>
+          <th>Drug Instruction</th>
+          <th>Quantity</th>
+          <th>Duration</th>
+          <th>Duration Unit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input class="form-control" id="drug-name" /></td>
+          <td><input class="form-control" id="drug-instruction" /></td>
+          <td><input id="quantity" name="quantity" min="1" max="100" step="1" type="number" class="form-control" onchange="fn_validateValue()" value="" maxlength="2"></td>
+          <td><input id="quantity" name="duration" min="1" max="100" step="1" type="number" class="form-control" onchange="fn_validateValue()" value="" maxlength="2"></td>
+          <td><div class="form-group">
+              <select id="durationUnit" name="durationUnit" data-allow-clear="1" data-placeholder="Select" class="form-control select2-single">
+                <option value="">Select</option>
+                <option value="Day/s">Day/s</option>
+                <option value="Week/s">Week/s</option>
+                <option value="Month/s">Month/s</option>
+              </select>
+            </div></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row justify-content-right">
+      <a href="javascript:saveDiagDtls('Y');" class="btn btn-primary btn-round ml-2 mr-2 btn1" role="button">Submit</a>      
+    </div> 
+  </div>
+  <br>    
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+    $( function() {
+    var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL"
+    ];
+
+    $(".diagnostic").hide();
+    $(".prescription").hide();
+
+
+    $("#diagnostic").on("click", function() {
+      $(".diagnostic").show();
+      $(".prescription").hide();
+    });
+    $("#prescription").on("click", function() {
+      $(".prescription").show();
+      $(".diagnostic").hide();
+    });
+
+
+
+    
+      $("#reportDate").keypress(function(event) {event.preventDefault();});
+        $('input[name="reportType"]:radio').change(function(){
+          switch($('input[name="reportType"]:checked').val()){
+          case '394595002':
+            $('.saveme').text('Laboratory Test Name');
+            break;
+          case '360037004':
+            $('.saveme').text('Radiology Test Name');
+            break;
+          default:
+            $('.saveme').text('Lab Test');
+          }
+        });
+
+    $( "#drug-name" ).autocomplete({
+      source: availableTags
+    });
+    $("#report_type").autocomplete({
+      source: availableTags
+    });
+
+  } );
+
+
+  });
+</script>
